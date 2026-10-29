@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.naming.LimitExceededException;
 import java.util.Map;
 
 public class ChatService {
@@ -21,7 +22,9 @@ public class ChatService {
         if (message == null || message.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Digite uma mensagem.");
         }
-
+        if(message.length()> 280){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Digite uma mensagem com menos de 280 caracteres.");
+        }
         message = message.trim();
 
         String reply = ollamaService.askOllama(message);
