@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ollama Chat</title>
+
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">✦</span>
+            <h2>Local AI</h2>
+        </div>
+
+        <button class="new-chat" onclick="newChat()">
+            + Nova conversa
+        </button>
+
+        <div class="sidebar-section">
+            <span class="section-title">HISTÓRICO</span>
+            <div id="history-list"></div>
+        </div>
+
+        <div class="sidebar-footer">
+            <span class="status-dot"></span>
+            Ollama local
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h3>Assistente IA</h3>
+                <span>Converse com seu modelo local</span>
+            </div>
+
+            <span class="model-badge">● Ollama</span>
+        </header>
+
+        <section class="chat-container" id="chat-container">
+
+            <div class="welcome" id="welcome">
+                <div class="welcome-icon">✦</div>
+                <h1>Como posso ajudar?</h1>
+                <p>Envie uma pergunta para começar uma conversa.</p>
+
+                <div class="suggestions">
+                    <button onclick="suggestQuestion('Explique o que é Spring Boot.')">
+                        Explique Spring Boot
+                    </button>
+
+                    <button onclick="suggestQuestion('Como funciona uma API REST?')">
+                        Como funciona uma API REST?
+                    </button>
+
+                    <button onclick="suggestQuestion('O que é inteligência artificial?')">
+                        O que é inteligência artificial?
+                    </button>
+                </div>
+            </div>
+
+            <div id="messages"></div>
+
+        </section>
+
+        <footer class="input-area">
+            <div class="input-wrapper">
+
+                <textarea
+                        id="message-input"
+                        placeholder="Digite sua pergunta..."
+                        rows="1"
+                        maxlength="2000"
+                ></textarea>
+
+                <button id="send-button" onclick="sendMessage()">
+                    ↑
+                </button>
+
+            </div>
+
+            <p>Ollama executando localmente · As respostas podem conter erros.</p>
+        </footer>
+
+    </main>
+</div>
+
+<script th:src="@{/js/chat.js}"></script>
+
+</body>
+</html>
