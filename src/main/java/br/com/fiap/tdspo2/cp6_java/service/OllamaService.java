@@ -31,16 +31,22 @@ public class OllamaService {
                 "messages", List.of(
                         Map.of(
                                 "role", "system",
-                                "content", "Você é um assistente prestativo. Responda em português."
+                                "content", "Você é um assistente prestativo especialista em literatura clássica. Responda em português brasileiro. "
                         ),
                         Map.of(
                                 "role", "user",
                                 "content", userMessage
                         )
                 ),
-                "stream", false
+                //limites
+                "stream", false,
+                "options", Map.of(
+                        "num_predict", 300,
+                        "temperature", 0.7,
+                        "top_p", 0.9,
+                        "num_ctx", 4096
+                )
         );
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
