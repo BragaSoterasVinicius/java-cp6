@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "chat_menssagem")
+@Table(name = "chat_mensagem")
 public class ChatMensagem {
 
     @Id
@@ -18,9 +18,9 @@ public class ChatMensagem {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // construtores
-    public ChatMessage() {}
+    public ChatMensagem() {}
 
-    public ChatMessage(String role, String content) {
+    public ChatMensagem(String role, String content) {
         this.role = role;
         this.content = content;
         this.createdAt = LocalDateTime.now();
