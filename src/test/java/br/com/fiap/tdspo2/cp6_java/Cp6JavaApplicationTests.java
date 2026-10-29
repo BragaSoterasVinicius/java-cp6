@@ -38,7 +38,7 @@ class OllamaServiceTest {
 	private OllamaService service;
 
 	private static final String BASE_URL = "http://localhost:11434";
-	private static final String MODEL = "llama3.2";
+	private static final String MODEL = "llama3.1:8b";
 
 	@BeforeEach
 	void setUp() {
@@ -78,7 +78,7 @@ class OllamaServiceTest {
 				.andRespond(withSuccess(
 						"""
                         {
-                            "model": "llama3.2",
+                            "model": "llama3.1:8b",
                             "message": {
                                 "role": "assistant",
                                 "content": "Olá!"
@@ -106,7 +106,7 @@ class OllamaServiceTest {
 				.andRespond(withSuccess(
 						"""
                         {
-                            "model": "llama3.2",
+                            "model": "llama3.1:8b",
                             "message": {
                                 "role": "assistant",
                                 "content": ""
@@ -143,7 +143,7 @@ class OllamaServiceTest {
 				.andRespond(withSuccess(
 						"""
                         {
-                            "model": "llama3.2",
+                            "model": "llama3.1:8b",
                             "done": true
                         }
                         """,

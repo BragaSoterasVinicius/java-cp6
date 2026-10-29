@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class OllamaConfig {
 
     private String baseUrl = "http://localhost:11434";
-    private String model = "llama3.2";
+    private String model = "llama3.1:8b";
 
     public String getBaseUrl() {
         return baseUrl;
