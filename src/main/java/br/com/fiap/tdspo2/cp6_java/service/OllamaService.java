@@ -23,6 +23,9 @@ public class OllamaService {
     @Autowired
     private OllamaConfig config;
 
+    @Autowired
+    private HistoricoService historicoService;
+
     public String askOllama(String userMessage) {
 
         Map<String, Object> body = Map.of(
@@ -69,7 +72,11 @@ public class OllamaService {
                 );
             }
 
-            return content.asText();
+            String resposta = content.asText();
+
+            historicoService.salvar(userMessage, resposta);
+
+            return resposta;
 
         } catch (RestClientResponseException e) {
 
