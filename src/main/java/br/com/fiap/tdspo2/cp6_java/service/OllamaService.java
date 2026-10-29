@@ -17,15 +17,19 @@ import java.util.Map;
 @Service
 public class OllamaService {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final OllamaConfig config;
+    private final HistoricoService historicoService;
 
-    @Autowired
-    private OllamaConfig config;
+    public OllamaService(
+            RestTemplate restTemplate,
+            OllamaConfig config,
+            HistoricoService historicoService) {
 
-    @Autowired
-    private HistoricoService historicoService;
-
+        this.restTemplate = restTemplate;
+        this.config = config;
+        this.historicoService = historicoService;
+    }
     public String askOllama(String userMessage) {
 
         Map<String, Object> body = Map.of(
