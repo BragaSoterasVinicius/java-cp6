@@ -2,6 +2,7 @@ package br.com.fiap.tdspo2.cp6_java.service;
 
 
 import br.com.fiap.tdspo2.cp6_java.config.OllamaConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -16,13 +17,11 @@ import java.util.Map;
 @Service
 public class OllamaService {
 
-    private final RestTemplate restTemplate;
-    private final OllamaConfig config;
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public OllamaService(RestTemplate restTemplate, OllamaConfig config) {
-        this.restTemplate = restTemplate;
-        this.config = config;
-    }
+    @Autowired
+    private OllamaConfig config;
 
     public String askOllama(String userMessage) {
 
