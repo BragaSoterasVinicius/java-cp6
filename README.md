@@ -382,6 +382,9 @@ Para executar os testes:
 
 As requisições podem ser executadas pelo Postman.
 
+tratamento de falha do provedor
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/63ae0627-69e0-42c4-aad7-e23af211bbd9" />
+
 /api/chat 200
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9381a1b7-54c7-4d5f-a69f-4cafa861dbda" />
 
