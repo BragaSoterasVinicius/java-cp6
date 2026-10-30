@@ -22,7 +22,7 @@ public class ChatService {
         this.ollamaService = ollamaService;
     }
     public ChatMensagem perguntar(Map<String, String> payload){
-        String message = payload.get("message");
+        String message = payload.get("mensagem");
         if (message == null || message.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Digite uma mensagem.");
         }
