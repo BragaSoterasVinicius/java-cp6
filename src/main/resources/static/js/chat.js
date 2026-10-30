@@ -77,7 +77,8 @@ async function sendMessage() {
             );
         }
 
-        const answer = await response.text();
+        const data = await response.json();
+        const answer = data.content;
 
         loadingMessage.querySelector(".message-content")
             .classList.remove("loading");
