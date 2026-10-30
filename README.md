@@ -382,6 +382,19 @@ Para executar os testes:
 
 As requisições podem ser executadas pelo Postman.
 
+/api/chat 200
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e499f7ac-a47d-4856-9c5d-a7d51ded4f6e" />
+
+/api/chat 400 (Mensagem sem conteúdo)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3c23bb6c-708c-497e-b646-76df5ce05702" />
+
+/api/chat 400 (Mensagem longa demais)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/014c076e-7034-42a1-b036-1dc407718565" />
+
+/api/historico 200
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26c69e95-cddf-49f3-aa83-6da83d051552" />
+
+
 
 | Cenário | Método | Endpoint | Resultado esperado |
 | :--- | :--- | :--- | :--- |
@@ -393,13 +406,14 @@ As requisições podem ser executadas pelo Postman.
 
 ## Estrutura de diretórios
 
-A organização geral esperada do projeto é:
+A organização geral do projeto é:
 
 ``` text
 cp6_java/
 ├── src/
 │   ├── main/
 │   │   ├── java/br/com/fiap/tdspo2/cp6_java/
+│   │   │   ├── config/
 │   │   │   ├── controller/
 │   │   │   ├── model/
 │   │   │   ├── repository/
@@ -411,45 +425,12 @@ cp6_java/
 │   │       ├── templates/
 │   │       └── application.properties
 │   └── test/
+│   │   └── java/br/com/fiap/tdspo2/cp6_java/service/
 ├── mvnw
 ├── mvnw.cmd
 ├── pom.xml
 └── README.md
 ```
-
-A estrutura pode variar conforme os pacotes e arquivos efetivamente
-presentes no projeto.
-
-## Observação sobre o requisito Spring AI
-
-O enunciado do CP6 solicita o uso de **Spring AI**, por meio de
-`ChatClient` ou `ChatModel`, na camada de serviço. A implementação
-descrita neste README utiliza a API HTTP nativa do Ollama (`/api/chat`)
-por meio de `RestTemplate`.
-
-Embora ambas as abordagens possam integrar a aplicação ao Ollama local,
-a chamada direta com `RestTemplate` não equivale à utilização de
-`ChatClient` ou `ChatModel` do Spring AI. Para atender literalmente a
-esse requisito da atividade, a integração deverá ser adaptada para o
-starter `spring-ai-starter-model-ollama` e para o `ChatClient` ou
-`ChatModel`, mantendo as demais camadas e funcionalidades.
-
-## Entrega do CP6
-
-Conforme o enunciado da atividade, a entrega deve contemplar:
-
--   Arquivo `.txt` com nome e RM dos integrantes, link do GitHub e IDE
-    utilizada.
--   Projeto completo, incluindo código-fonte, `pom.xml`, Maven Wrapper,
-    configurações de exemplo, scripts do banco e coleção do Postman.
--   README no GitHub com objetivo, arquitetura, versões, instruções de
-    execução, configuração do banco e do provedor, imagens e exemplos de
-    requisições e respostas.
--   Vídeo em `.mp4` ou link não listado do YouTube, acessível ao
-    professor, demonstrando a aplicação e os testes.
-
-Não inclua chaves de API, senhas reais ou outras credenciais no
-repositório ou no vídeo.
 
 ------------------------------------------------------------------------
 
