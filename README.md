@@ -33,28 +33,27 @@ oferecer uma interface web e persistir o histórico de consultas.
 
 ## Tecnologias
 
-  Tecnologia               Utilização
-  ------------------------ -------------------------------------------------
-  Java                     Linguagem de programação
-  Spring Boot              Estrutura principal da aplicação
-  Spring Web               Exposição dos endpoints REST e comunicação HTTP
-  Spring Data JPA          Persistência e consulta dos registros
-  Hibernate                Implementação ORM utilizada pelo JPA
-  Maven                    Gerenciamento de dependências e build
-  Ollama                   Execução local do modelo de IA
-  Llama 3.2                Modelo de linguagem configurado como padrão
-  HTML, CSS e JavaScript   Interface web
-  Thymeleaf                Renderização da página web pelo Spring Boot
-  JUnit 5 e Mockito        Testes automatizados
 
-> **Versões:** registre nesta seção as versões efetivamente utilizadas
-> no `pom.xml` e no ambiente de execução. Não mantenha números que não
-> correspondam à configuração real do projeto.
+| Tecnologia | Utilização |
+| :--- | :--- |
+| Java | Linguagem de programação |
+| Spring Boot | Estrutura principal da aplicação |
+| Spring Web | Exposição dos endpoints REST e comunicação HTTP |
+| Spring Data JPA | Persistência e consulta dos registros |
+| Hibernate | Implementação ORM utilizada pelo JPA |
+| Maven | Gerenciamento de dependências e build |
+| Ollama | Execução local do modelo de IA |
+| Llama 3.2 | Modelo de linguagem configurado como padrão |
+| HTML, CSS e JavaScript | Interface web |
+| Thymeleaf | Renderização da página web pelo Spring Boot |
+| JUnit 5 e Mockito | Testes automatizados |
+
 
 ## Arquitetura
 
 O projeto segue uma organização em camadas, separando a exposição dos
 endpoints, as regras de negócio e o acesso aos dados.
+
 
 Pacote-base:
 
@@ -62,39 +61,22 @@ Pacote-base:
 br.com.fiap.tdspo2.cp6_java
 ```
 
+
 Principais componentes:
 
-  -----------------------------------------------------------------------
-  Componente                          Responsabilidade
-  ----------------------------------- -----------------------------------
-  `ChatController`                    Expõe os endpoints REST
-                                      relacionados ao chat.
 
-  `ChatPageController`                Disponibiliza a página web do
-                                      assistente.
+| Componente | Responsabilidade |
+| :--- | :--- |
+| `ChatController` | Expõe os endpoints REST relacionados ao chat. |
+| `ChatPageController` | Disponibiliza a página web do assistente. |
+| `ChatService` | Valida a mensagem recebida e coordena o processamento da interação. |
+| `OllamaService` | Envia a pergunta ao Ollama local e obtém o conteúdo da resposta. |
+| `HistoricoService` | Salva as interações e disponibiliza a consulta do histórico. |
+| `HistoricoRepository` | Realiza a persistência e consulta dos registros de histórico. |
+| `ChatMensagemRepository` | Realiza a persistência das mensagens de chat. |
+| `Historico` | Entidade que representa um registro do histórico. |
+| `ChatMensagem` | Entidade utilizada para representar uma mensagem do chat. |
 
-  `ChatService`                       Valida a mensagem recebida e
-                                      coordena o processamento da
-                                      interação.
-
-  `OllamaService`                     Envia a pergunta ao Ollama local e
-                                      obtém o conteúdo da resposta.
-
-  `HistoricoService`                  Salva as interações e disponibiliza
-                                      a consulta do histórico.
-
-  `HistoricoRepository`               Realiza a persistência e consulta
-                                      dos registros de histórico.
-
-  `ChatMensagemRepository`            Realiza a persistência das
-                                      mensagens de chat.
-
-  `Historico`                         Entidade que representa um registro
-                                      do histórico.
-
-  `ChatMensagem`                      Entidade utilizada para representar
-                                      uma mensagem do chat.
-  -----------------------------------------------------------------------
 
 ### Fluxo de uma interação
 
@@ -134,33 +116,18 @@ localmente, desde que o nome corresponda ao apresentado pelo comando
 
 ### Parâmetros de geração
 
+
 A requisição utiliza os seguintes parâmetros:
 
-  ------------------------------------------------------------------------
-  Parâmetro                                    Valor Finalidade
-  --------------------- ---------------------------- ---------------------
-  `stream`                                   `false` Aguarda a resposta
-                                                     completa em vez de
-                                                     receber tokens
-                                                     progressivamente.
 
-  `num_predict`                                `300` Limita a quantidade
-                                                     de tokens gerados na
-                                                     resposta.
+| Parâmetro | Valor | Finalidade |
+| :--- | :--- | :--- |
+| `stream` | `false` | Aguarda a resposta completa em vez de receber tokens progressivamente. |
+| `num_predict` | `300` | Limita a quantidade de tokens gerados na resposta. |
+| `temperature` | `0.7` | Controla a aleatoriedade da geração. |
+| `top_p` | `0.9` | Controla a seleção de tokens durante a geração. |
+| `num_ctx` | `4096` | Define o tamanho da janela de contexto utilizada pelo modelo. |
 
-  `temperature`                                `0.7` Controla a
-                                                     aleatoriedade da
-                                                     geração.
-
-  `top_p`                                      `0.9` Controla a seleção de
-                                                     tokens durante a
-                                                     geração.
-
-  `num_ctx`                                   `4096` Define o tamanho da
-                                                     janela de contexto
-                                                     utilizada pelo
-                                                     modelo.
-  ------------------------------------------------------------------------
 
 ### Prompt de sistema
 
@@ -415,27 +382,14 @@ Para executar os testes:
 
 As requisições podem ser executadas pelo Postman.
 
-  ------------------------------------------------------------------------
-  Cenário           Método            Endpoint           Resultado
-                                                         esperado
-  ----------------- ----------------- ------------------ -----------------
-  Enviar pergunta   POST              `/api/chat`        Resposta gerada
-  válida                                                 pelo modelo.
 
-  Enviar mensagem   POST              `/api/chat`        HTTP 400.
-  vazia                                                  
-
-  Enviar mensagem   POST              `/api/chat`        HTTP 400.
-  acima do limite                                        
-
-  Consultar         GET               `/api/historico`   Registros
-  histórico                                              ordenados por
-                                                         data decrescente.
-
-  Consultar com     POST              `/api/chat`        Erro tratado pela
-  Ollama                                                 aplicação.
-  indisponível                                           
-  ------------------------------------------------------------------------
+| Cenário | Método | Endpoint | Resultado esperado |
+| :--- | :--- | :--- | :--- |
+| Enviar pergunta válida | POST | `/api/chat` | Resposta gerada pelo modelo. |
+| Enviar mensagem vazia | POST | `/api/chat` | HTTP 400. |
+| Enviar mensagem acima do limite | POST | `/api/chat` | HTTP 400. |
+| Consultar histórico | GET | `/api/historico` | Registros ordenados por data decrescente. |
+| Consultar com Ollama indisponível | POST | `/api/chat` | Erro tratado pela aplicação. |
 
 ## Estrutura de diretórios
 
