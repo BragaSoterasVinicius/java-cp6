@@ -383,7 +383,7 @@ Para executar os testes:
 As requisições podem ser executadas pelo Postman.
 
 /api/chat 200
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e499f7ac-a47d-4856-9c5d-a7d51ded4f6e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9381a1b7-54c7-4d5f-a69f-4cafa861dbda" />
 
 /api/chat 400 (Mensagem sem conteúdo)
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3c23bb6c-708c-497e-b646-76df5ce05702" />
