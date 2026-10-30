@@ -61,7 +61,7 @@ async function sendMessage() {
         .classList.add("loading");
 
     try {
-        const response = await fetch("/api/ollama/ask", {
+        const response = await fetch("/api/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
