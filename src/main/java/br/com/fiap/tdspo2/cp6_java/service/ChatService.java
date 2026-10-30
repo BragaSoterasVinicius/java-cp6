@@ -12,11 +12,16 @@ import java.util.Map;
 
 public class ChatService {
 
-    @Autowired
-    private ChatMensagemRepository chatRepository;
+    private final ChatMensagemRepository chatRepository;
+    private final OllamaService ollamaService;
 
-    @Autowired
-    private OllamaService ollamaService;
+    public ChatService(
+            ChatMensagemRepository chatRepository,
+            OllamaService ollamaService) {
+
+        this.chatRepository = chatRepository;
+        this.ollamaService = ollamaService;
+    }
     public ChatMensagem perguntar(Map<String, String> payload){
         String message = payload.get("message");
         if (message == null || message.isBlank()) {

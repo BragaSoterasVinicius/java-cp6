@@ -1,8 +1,6 @@
-package br.com.fiap.tdspo2.cp6_java;
+package br.com.fiap.tdspo2.cp6_java.service;
 
 import br.com.fiap.tdspo2.cp6_java.config.OllamaConfig;
-import br.com.fiap.tdspo2.cp6_java.service.HistoricoService;
-import br.com.fiap.tdspo2.cp6_java.service.OllamaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
