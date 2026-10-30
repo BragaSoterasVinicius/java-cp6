@@ -2,14 +2,13 @@ package br.com.fiap.tdspo2.cp6_java.service;
 
 import br.com.fiap.tdspo2.cp6_java.model.ChatMensagem;
 import br.com.fiap.tdspo2.cp6_java.repository.ChatMensagemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.naming.LimitExceededException;
 import java.util.Map;
 
+@Service
 public class ChatService {
 
     private final ChatMensagemRepository chatRepository;
