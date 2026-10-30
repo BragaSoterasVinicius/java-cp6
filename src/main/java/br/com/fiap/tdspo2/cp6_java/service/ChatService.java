@@ -33,10 +33,12 @@ public class ChatService {
 
         String reply = ollamaService.askOllama(message);
 
-        ChatMensagem userMsg = new ChatMensagem("user", message);
+        ChatMensagem userMsg = new ChatMensagem("user", message,
+                ollamaService.getConfig().getBaseUrl(), ollamaService.getConfig().getModel());
         chatRepository.save(userMsg);
 
-        ChatMensagem botMsg = new ChatMensagem("assistant", reply);
+        ChatMensagem botMsg = new ChatMensagem("assistant", reply,
+                ollamaService.getConfig().getBaseUrl(), ollamaService.getConfig().getModel());
         chatRepository.save(botMsg);
 
         return botMsg;

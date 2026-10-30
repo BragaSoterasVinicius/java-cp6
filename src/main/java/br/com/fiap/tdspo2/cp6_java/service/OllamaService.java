@@ -30,6 +30,11 @@ public class OllamaService {
         this.config = config;
         this.historicoService = historicoService;
     }
+
+    public OllamaConfig getConfig() {
+        return config;
+    }
+
     public String askOllama(String userMessage) {
 
         Map<String, Object> body = Map.of(

@@ -16,14 +16,38 @@ public class ChatMensagem {
     @Column(columnDefinition = "text")
     private String content;
     private LocalDateTime createdAt = LocalDateTime.now();
+    private String provedor;
+    private String modelo;
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProvedor() {
+        return provedor;
+    }
+
+    public void setProvedor(String provedor) {
+        this.provedor = provedor;
+    }
 
     // construtores
     public ChatMensagem() {}
 
-    public ChatMensagem(String role, String content) {
+    public ChatMensagem(String role, String content, String provedor, String modelo) {
         this.role = role;
         this.content = content;
         this.createdAt = LocalDateTime.now();
+        this.provedor = provedor;
+        this.modelo = modelo;
     }
 
     // getters e setters
