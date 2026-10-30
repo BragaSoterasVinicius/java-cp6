@@ -2,7 +2,7 @@
 
 Postman: https://www.postman.com/amandaba-group/workspace/cp6-java/collection/58012781-e41b859b-efcd-49de-b596-23a3f49e31ec?action=share&source=copy-link&creator=58012781
 
-Vídeo no Youtube: 
+Vídeo no Youtube: https://youtu.be/Wis6XM6E9DU
 # Assistente de Literatura Clássica com IA Local
 
 Aplicação web desenvolvida em Java e Spring Boot para oferecer um
