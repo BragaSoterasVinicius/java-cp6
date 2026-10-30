@@ -33,28 +33,27 @@ oferecer uma interface web e persistir o histórico de consultas.
 
 ## Tecnologias
 
-  Tecnologia               Utilização
-  ------------------------ -------------------------------------------------
-  Java                     Linguagem de programação
-  Spring Boot              Estrutura principal da aplicação
-  Spring Web               Exposição dos endpoints REST e comunicação HTTP
-  Spring Data JPA          Persistência e consulta dos registros
-  Hibernate                Implementação ORM utilizada pelo JPA
-  Maven                    Gerenciamento de dependências e build
-  Ollama                   Execução local do modelo de IA
-  Llama 3.2                Modelo de linguagem configurado como padrão
-  HTML, CSS e JavaScript   Interface web
-  Thymeleaf                Renderização da página web pelo Spring Boot
-  JUnit 5 e Mockito        Testes automatizados
 
-> **Versões:** registre nesta seção as versões efetivamente utilizadas
-> no `pom.xml` e no ambiente de execução. Não mantenha números que não
-> correspondam à configuração real do projeto.
+| Tecnologia | Utilização |
+| :--- | :--- |
+| Java | Linguagem de programação |
+| Spring Boot | Estrutura principal da aplicação |
+| Spring Web | Exposição dos endpoints REST e comunicação HTTP |
+| Spring Data JPA | Persistência e consulta dos registros |
+| Hibernate | Implementação ORM utilizada pelo JPA |
+| Maven | Gerenciamento de dependências e build |
+| Ollama | Execução local do modelo de IA |
+| Llama 3.2 | Modelo de linguagem configurado como padrão |
+| HTML, CSS e JavaScript | Interface web |
+| Thymeleaf | Renderização da página web pelo Spring Boot |
+| JUnit 5 e Mockito | Testes automatizados |
+
 
 ## Arquitetura
 
 O projeto segue uma organização em camadas, separando a exposição dos
 endpoints, as regras de negócio e o acesso aos dados.
+
 
 Pacote-base:
 
@@ -62,39 +61,22 @@ Pacote-base:
 br.com.fiap.tdspo2.cp6_java
 ```
 
+
 Principais componentes:
 
-  -----------------------------------------------------------------------
-  Componente                          Responsabilidade
-  ----------------------------------- -----------------------------------
-  `ChatController`                    Expõe os endpoints REST
-                                      relacionados ao chat.
 
-  `ChatPageController`                Disponibiliza a página web do
-                                      assistente.
+| Componente | Responsabilidade |
+| :--- | :--- |
+| `ChatController` | Expõe os endpoints REST relacionados ao chat. |
+| `ChatPageController` | Disponibiliza a página web do assistente. |
+| `ChatService` | Valida a mensagem recebida e coordena o processamento da interação. |
+| `OllamaService` | Envia a pergunta ao Ollama local e obtém o conteúdo da resposta. |
+| `HistoricoService` | Salva as interações e disponibiliza a consulta do histórico. |
+| `HistoricoRepository` | Realiza a persistência e consulta dos registros de histórico. |
+| `ChatMensagemRepository` | Realiza a persistência das mensagens de chat. |
+| `Historico` | Entidade que representa um registro do histórico. |
+| `ChatMensagem` | Entidade utilizada para representar uma mensagem do chat. |
 
-  `ChatService`                       Valida a mensagem recebida e
-                                      coordena o processamento da
-                                      interação.
-
-  `OllamaService`                     Envia a pergunta ao Ollama local e
-                                      obtém o conteúdo da resposta.
-
-  `HistoricoService`                  Salva as interações e disponibiliza
-                                      a consulta do histórico.
-
-  `HistoricoRepository`               Realiza a persistência e consulta
-                                      dos registros de histórico.
-
-  `ChatMensagemRepository`            Realiza a persistência das
-                                      mensagens de chat.
-
-  `Historico`                         Entidade que representa um registro
-                                      do histórico.
-
-  `ChatMensagem`                      Entidade utilizada para representar
-                                      uma mensagem do chat.
-  -----------------------------------------------------------------------
 
 ### Fluxo de uma interação
 
@@ -134,33 +116,18 @@ localmente, desde que o nome corresponda ao apresentado pelo comando
 
 ### Parâmetros de geração
 
+
 A requisição utiliza os seguintes parâmetros:
 
-  ------------------------------------------------------------------------
-  Parâmetro                                    Valor Finalidade
-  --------------------- ---------------------------- ---------------------
-  `stream`                                   `false` Aguarda a resposta
-                                                     completa em vez de
-                                                     receber tokens
-                                                     progressivamente.
 
-  `num_predict`                                `300` Limita a quantidade
-                                                     de tokens gerados na
-                                                     resposta.
+| Parâmetro | Valor | Finalidade |
+| :--- | :--- | :--- |
+| `stream` | `false` | Aguarda a resposta completa em vez de receber tokens progressivamente. |
+| `num_predict` | `300` | Limita a quantidade de tokens gerados na resposta. |
+| `temperature` | `0.7` | Controla a aleatoriedade da geração. |
+| `top_p` | `0.9` | Controla a seleção de tokens durante a geração. |
+| `num_ctx` | `4096` | Define o tamanho da janela de contexto utilizada pelo modelo. |
 
-  `temperature`                                `0.7` Controla a
-                                                     aleatoriedade da
-                                                     geração.
-
-  `top_p`                                      `0.9` Controla a seleção de
-                                                     tokens durante a
-                                                     geração.
-
-  `num_ctx`                                   `4096` Define o tamanho da
-                                                     janela de contexto
-                                                     utilizada pelo
-                                                     modelo.
-  ------------------------------------------------------------------------
 
 ### Prompt de sistema
 
@@ -415,37 +382,38 @@ Para executar os testes:
 
 As requisições podem ser executadas pelo Postman.
 
-  ------------------------------------------------------------------------
-  Cenário           Método            Endpoint           Resultado
-                                                         esperado
-  ----------------- ----------------- ------------------ -----------------
-  Enviar pergunta   POST              `/api/chat`        Resposta gerada
-  válida                                                 pelo modelo.
+/api/chat 200
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e499f7ac-a47d-4856-9c5d-a7d51ded4f6e" />
 
-  Enviar mensagem   POST              `/api/chat`        HTTP 400.
-  vazia                                                  
+/api/chat 400 (Mensagem sem conteúdo)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3c23bb6c-708c-497e-b646-76df5ce05702" />
 
-  Enviar mensagem   POST              `/api/chat`        HTTP 400.
-  acima do limite                                        
+/api/chat 400 (Mensagem longa demais)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/014c076e-7034-42a1-b036-1dc407718565" />
 
-  Consultar         GET               `/api/historico`   Registros
-  histórico                                              ordenados por
-                                                         data decrescente.
+/api/historico 200
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26c69e95-cddf-49f3-aa83-6da83d051552" />
 
-  Consultar com     POST              `/api/chat`        Erro tratado pela
-  Ollama                                                 aplicação.
-  indisponível                                           
-  ------------------------------------------------------------------------
+
+
+| Cenário | Método | Endpoint | Resultado esperado |
+| :--- | :--- | :--- | :--- |
+| Enviar pergunta válida | POST | `/api/chat` | Resposta gerada pelo modelo. |
+| Enviar mensagem vazia | POST | `/api/chat` | HTTP 400. |
+| Enviar mensagem acima do limite | POST | `/api/chat` | HTTP 400. |
+| Consultar histórico | GET | `/api/historico` | Registros ordenados por data decrescente. |
+| Consultar com Ollama indisponível | POST | `/api/chat` | Erro tratado pela aplicação. |
 
 ## Estrutura de diretórios
 
-A organização geral esperada do projeto é:
+A organização geral do projeto é:
 
 ``` text
 cp6_java/
 ├── src/
 │   ├── main/
 │   │   ├── java/br/com/fiap/tdspo2/cp6_java/
+│   │   │   ├── config/
 │   │   │   ├── controller/
 │   │   │   ├── model/
 │   │   │   ├── repository/
@@ -457,45 +425,12 @@ cp6_java/
 │   │       ├── templates/
 │   │       └── application.properties
 │   └── test/
+│   │   └── java/br/com/fiap/tdspo2/cp6_java/service/
 ├── mvnw
 ├── mvnw.cmd
 ├── pom.xml
 └── README.md
 ```
-
-A estrutura pode variar conforme os pacotes e arquivos efetivamente
-presentes no projeto.
-
-## Observação sobre o requisito Spring AI
-
-O enunciado do CP6 solicita o uso de **Spring AI**, por meio de
-`ChatClient` ou `ChatModel`, na camada de serviço. A implementação
-descrita neste README utiliza a API HTTP nativa do Ollama (`/api/chat`)
-por meio de `RestTemplate`.
-
-Embora ambas as abordagens possam integrar a aplicação ao Ollama local,
-a chamada direta com `RestTemplate` não equivale à utilização de
-`ChatClient` ou `ChatModel` do Spring AI. Para atender literalmente a
-esse requisito da atividade, a integração deverá ser adaptada para o
-starter `spring-ai-starter-model-ollama` e para o `ChatClient` ou
-`ChatModel`, mantendo as demais camadas e funcionalidades.
-
-## Entrega do CP6
-
-Conforme o enunciado da atividade, a entrega deve contemplar:
-
--   Arquivo `.txt` com nome e RM dos integrantes, link do GitHub e IDE
-    utilizada.
--   Projeto completo, incluindo código-fonte, `pom.xml`, Maven Wrapper,
-    configurações de exemplo, scripts do banco e coleção do Postman.
--   README no GitHub com objetivo, arquitetura, versões, instruções de
-    execução, configuração do banco e do provedor, imagens e exemplos de
-    requisições e respostas.
--   Vídeo em `.mp4` ou link não listado do YouTube, acessível ao
-    professor, demonstrando a aplicação e os testes.
-
-Não inclua chaves de API, senhas reais ou outras credenciais no
-repositório ou no vídeo.
 
 ------------------------------------------------------------------------
 
