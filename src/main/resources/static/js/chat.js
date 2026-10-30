@@ -67,7 +67,7 @@ async function sendMessage() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: userMessage
+                mensagem: userMessage
             })
         });
 
